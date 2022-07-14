@@ -4,7 +4,7 @@ local lspkind = require('lspkind')
 cmp.setup({
  formatting = {
   format = lspkind.cmp_format({
-    mode = "symbol",
+    preset = 'default',
     symbol_map = {
       Text = " ",
       Method = " ",
@@ -12,7 +12,7 @@ cmp.setup({
       Constructor = " ",
       Field = "ﰠ ",
       Variable = " ",
-      Class = " ﴯ",
+      Class = "ﴯ ",
       Interface = " ",
       Module = " ",
       Property = "ﰠ ",
@@ -32,6 +32,7 @@ cmp.setup({
       Operator = " ",
       TypeParameter = ""
     },
+    mode = "symbol",
     menu = ({
       buffer = "[Buffer]",
       nvim_lsp = "[LSP]",
@@ -42,16 +43,12 @@ cmp.setup({
       }),
     },
     experimental = {
-    ghost_text = true,
+    ghost_text = false,
     },
     snippet = {
       expand = function(args)
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
       end,
-    },
-    window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),

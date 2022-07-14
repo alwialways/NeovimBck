@@ -11,10 +11,7 @@ return require("packer").startup({function()
     use "Pocco81/AutoSave.nvim"
     use 'windwp/nvim-ts-autotag'
     use 'windwp/nvim-autopairs'
-    -- use {'neoclide/coc.nvim', branch = 'release'}
-    use {
-      "ray-x/lsp_signature.nvim",
-    }
+    use 'p00f/nvim-ts-rainbow'
     use({"petertriho/cmp-git", requires = "nvim-lua/plenary.nvim"})
     use {
       'lewis6991/gitsigns.nvim',
@@ -53,6 +50,8 @@ return require("packer").startup({function()
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
     use 'navarasu/onedark.nvim'
+    -- Using Packer:
+    use 'Mofiqul/dracula.nvim'
     use {
       'nvim-telescope/telescope.nvim',
       requires = { {'nvim-lua/plenary.nvim'} }

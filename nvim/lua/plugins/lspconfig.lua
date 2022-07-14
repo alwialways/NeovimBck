@@ -28,39 +28,31 @@ lspconfig.util.default_config = vim.tbl_extend(
 -- 3. Loop through all of the installed servers and set it up via lspconfig
 for _, server in ipairs(lsp_installer.get_installed_servers()) do
   lspconfig[server.name].setup {}
-    require "lsp_signature".setup({
-    bind = true, -- This is mandatory, otherwise border config won't get registered.
-    handler_opts = {
-      border = "rounded"
-    }
-  })
 
     --setup diagnostic
-    local signs = { Error = " ", Warn = " ", Hint = "", Info = " " }
+    local signs = { Error = "", Warn = " ", Hint = "", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
     end
 
      vim.diagnostic.config({
-      virtual_text = false,
+      virtual_text = true,
       virtual_lines = false,
-      update_in_insert = true
+      update_in_insert = false
     })
 
     vim.o.updatetime = 250
-    vim.api.nvim_create_autocmd("CursorHold", {
-      buffer = bufnr,
-      callback = function()
-        local opts = {
-          focusable = false,
-          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-          border = 'rounded',
-          source = 'if_many',
-          prefix =   '● ',  --'■', -- Could be '●', '▎', 'x',
-          scope = 'cursor',
-        }
-        vim.diagnostic.open_float(nil, opts)
-      end
-    })
 end
+
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
+
+require'lspconfig'.html.setup {
+    capabilities = capabilities,
+}

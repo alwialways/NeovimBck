@@ -19,7 +19,6 @@ local function has_value (tab, val)
     return false
 end
 
-
 local function get_color()
     if vim.o.background == 'light' then
         return "#fff"
@@ -170,17 +169,7 @@ local buffer_empty = function()
     end
     return true
 end
-
 gls.left[1] = {
-  FirstElement = {
-    provider = function() return ' ' end,
-    separator = " ",
-    separator_highlight = {colors.magenta,colors.line_bg},
-    highlight = {colors.magenta,colors.magenta}
-  },
-}
-
-gls.left[2] = {
   ViMode = {
     provider = function()
       local mode_color = {
@@ -199,13 +188,13 @@ gls.left[2] = {
       }
       local vim_mode = vim.fn.mode()
       vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim_mode])
-      return '   '
+      return '▊   '
     end,
     highlight = {colors.magenta,colors.line_bg,'bold'},
   },
 }
 
-gls.left[3] = {
+gls.left[2] = {
     leftRounded = {
         provider = function()
             return ""
@@ -216,7 +205,7 @@ gls.left[3] = {
 }
 
 
-gls.left[4] ={
+gls.left[3] ={
   FileIcon = {
     provider = 'FileIcon',
     condition = buffer_not_empty,
@@ -224,7 +213,7 @@ gls.left[4] ={
   },
 }
 
-gls.left[5] = {
+gls.left[4] = {
   FileName = {
     provider = {get_current_file_name},
     separator = " ",
@@ -234,13 +223,13 @@ gls.left[5] = {
   }
 }
 
-gls.left[6] = {
+gls.left[5] = {
     FileSize = {
         provider = "FileSize",
         highlight = {colors.cyan,colors.line_bg,'bold'}
     }
 }
-gls.left[7] = {
+gls.left[6] = {
   GitIcon = {
     provider = function() return '    ' end,
     condition = require('galaxyline.provider_vcs').check_git_workspace,
@@ -248,7 +237,7 @@ gls.left[7] = {
   }
 }
 
-gls.left[8] = {
+gls.left[7] = {
   GitBranch = {
     provider = 'GitBranch',
     separator = " ",
@@ -267,13 +256,13 @@ local checkwidth = function()
   return false
 end
 
-gls.left[9] = {
+gls.left[8] = {
   Space = {
     provider = function () return '' end
   }
 }
 
-gls.left[10] = {
+gls.left[9] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = checkwidth,
@@ -281,7 +270,7 @@ gls.left[10] = {
     highlight = {colors.green,colors.line_bg},
   }
 }
-gls.left[11] = {
+gls.left[10] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = checkwidth,
@@ -289,7 +278,7 @@ gls.left[11] = {
     highlight = {colors.orange,colors.line_bg},
   }
 }
-gls.left[12] = {
+gls.left[11] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = checkwidth,
@@ -298,7 +287,7 @@ gls.left[12] = {
   }
 }
 
-gls.left[13] = {
+gls.left[12] = {
     TrailingWhiteSpace = {
      provider = TrailingWhiteSpace,
      icon = '   ',
@@ -306,19 +295,19 @@ gls.left[13] = {
     }
 }
 
-gls.left[14] = {
+gls.left[13] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
     highlight = {colors.red,colors.line_bg}
   }
 }
-gls.left[15] = {
+gls.left[14] = {
   Space = {
     provider = function () return '' end
   }
 }
-gls.left[16] = {
+gls.left[15] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '   ',
